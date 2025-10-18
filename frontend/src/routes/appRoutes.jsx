@@ -1,12 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
-import ProtectedRoute from "../components/ProtectedRoute";
-import RoleBasedRoute from "../components/RoleBasedRoute";
 
-import LayoutDehqon from "../components/layout/LayoutDehqon";
-import LayoutChorvador from "../components/layout/LayoutChorvador";
-import LayoutAdmin from "../components/layout/LayoutAdmin";
+// import LayoutDehqon from "../components/layout/LayoutDehqon";
+// import LayoutChorvador from "../components/layout/LayoutChorvador";
+// import LayoutAdmin from "../components/layout/LayoutAdmin";
+import LayoutMain from "../components/layout/LayoutMain"
 
 // Dehqon sahifalari
 import DashboardDehqon from "../pages/dehqon/Dashboard";
@@ -40,6 +39,10 @@ import CommunityAdmin from "../pages/admin/CommunityControl";
 import SystemSettingsAdmin from "../pages/admin/SystemSettingsPage";
 
 function AppRoutes() {
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const role = currentUser?.role;
+
   return (
     <Routes>
       <Route path="/login" element={<Login />} />
@@ -48,11 +51,7 @@ function AppRoutes() {
       <Route
         path="/dehqon/*"
         element={
-          <ProtectedRoute>
-            <RoleBasedRoute allowedRoles={["dehqon"]}>
-              <LayoutDehqon />
-            </RoleBasedRoute>
-          </ProtectedRoute>
+              <LayoutMain role={role} />
         }
       >
         <Route path="dashboard" index element={<DashboardDehqon />} />
@@ -70,11 +69,7 @@ function AppRoutes() {
       <Route
         path="/chorvador/*"
         element={
-          <ProtectedRoute>
-            <RoleBasedRoute allowedRoles={["chorvador"]}>
-              <LayoutChorvador />
-            </RoleBasedRoute>
-          </ProtectedRoute>
+              <LayoutMain role={role} />
         }
       >
         <Route path="dashboard" index element={<DashboardChorvador />} />
@@ -92,11 +87,7 @@ function AppRoutes() {
       <Route
         path="/admin/*"
         element={
-          <ProtectedRoute>
-            <RoleBasedRoute allowedRoles={["admin"]}>
-              <LayoutAdmin />
-            </RoleBasedRoute>
-          </ProtectedRoute>
+              <LayoutMain role={role} />
         }
       >
         <Route path="dashboard" index element={<AdminDashboard />} />

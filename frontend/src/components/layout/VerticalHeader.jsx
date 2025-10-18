@@ -1,4 +1,4 @@
-import { Layout, Menu } from "antd";
+import { Menu } from "antd";
 import {
   DashboardOutlined,
   FieldNumberOutlined,
@@ -10,15 +10,10 @@ import {
   TeamOutlined,
   MessageOutlined,
 } from "@ant-design/icons";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
-const { Sider } = Layout;
-
-const Sidebar = () => {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  const role = currentUser?.role || "dehqon";
-  const [collapsed, setCollapsed] = useState(false);
+const VerticalHeader = ({ role }) => {
+  const location = useLocation();
 
   const sidebarItems = {
     dehqon: [
@@ -50,39 +45,29 @@ const Sidebar = () => {
   };
 
   return (
-    <Sider
-      collapsible
-      collapsed={collapsed}
-      onCollapse={(value) => setCollapsed(value)}
-      style={{
-        background: "#f6ffed",
-        borderRight: "1px solid #d9f7be",
-        height: "100vh",
-      }}
-    >
-      <div className="flex items-center justify-center p-4 border-b border-green-200">
-        <img
-          src="/agrolink-logo2.png"
-          alt="logo"
-          className="w-10 h-10 mr-2"
-        />
-        {!collapsed && (
-          <span className="text-lg font-bold text-green-700">AGRO AI</span>
-        )}
+    <div className="p-4">
+      <div className="flex items-center mb-6">
+        <div className="w-9 h-9 bg-green-100 rounded-lg flex items-center justify-center">
+          <span className="text-green-700 text-lg font-semibold">🌾</span>
+        </div>
+        <span className="ml-2 text-green-800 font-semibold text-lg">AGRO&nbsp;AI</span>
       </div>
 
       <Menu
         mode="inline"
-        defaultSelectedKeys={["/dashboard"]}
-        style={{ background: "#f6ffed" }}
-        items={sidebarItems[role].map((item) => ({
+        selectedKeys={[location.pathname]}
+        items={sidebarItems[role]?.map((item) => ({
           key: item.key,
-          icon: item.icon,
-          label: <Link to={item.key}>{item.label}</Link>,
+          icon: <div style={{color:"#16a34a"}}>{item.icon}</div>,
+          label: <Link to={item.key} style={{color:"#166534"}}>{item.label}</Link>,
         }))}
+        style={{
+          backgroundColor: "transparent",
+          border: "none",
+        }}
       />
-    </Sider>
+    </div>
   );
 };
 
-export default Sidebar;
+export default VerticalHeader;
