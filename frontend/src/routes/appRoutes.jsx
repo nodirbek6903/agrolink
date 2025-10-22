@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 
@@ -21,8 +21,8 @@ import HelpDehqon from  "../pages/dehqon/HelpPage"
 
 // Chorvador sahifalari
 import DashboardChorvador from "../pages/chorvador/Dashboard";
-import AnimalsChorvador from "../pages/chorvador/AnimalsPage";
-import FeedChorvador from "../pages/chorvador/FeedingPage";
+import AnimalsChorvador from "../pages/chorvador/AnimalsPage/AnimalsPage";
+import FeedChorvador from "../pages/chorvador/FeedingPage/FeedingPage";
 import HealthChorvador from "../pages/chorvador/HealthPage";
 import FinanceChorvador from "../pages/chorvador/FinancePage";
 import AlertsChorvador from "../pages/chorvador/AlertsPage";
@@ -37,11 +37,19 @@ import ReportsAdmin from "../pages/admin/ReportsPage";
 import UsersAdmin from "../pages/admin/UsersPage";
 import CommunityAdmin from "../pages/admin/CommunityControl";
 import SystemSettingsAdmin from "../pages/admin/SystemSettingsPage";
+import { useEffect, useState } from "react";
 
 function AppRoutes() {
+const [role,setRole] = useState(() => {
+  const user = JSON.parse(localStorage.getItem("currentUser"))
+  return user?.role || null
+})
+const location = useLocation()
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  const role = currentUser?.role;
+useEffect(() => {
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+    setRole(user?.role || null);
+},[location])
 
   return (
     <Routes>

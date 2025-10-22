@@ -22,7 +22,6 @@ const Header = ({ toggleSidebar }) => {
 
   return (
     <div className="flex justify-between items-center w-full">
-      {/* Chap qism */}
       <div className="flex items-center gap-3">
         <Button
           type="text"
@@ -37,7 +36,6 @@ const Header = ({ toggleSidebar }) => {
         </Text>
       </div>
 
-      {/* O‘ng qism */}
       <Dropdown menu={{ items: menuItems }} trigger={["click"]}>
         <div className="flex items-center gap-2 cursor-pointer">
           <Avatar

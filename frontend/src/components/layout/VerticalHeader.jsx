@@ -28,7 +28,7 @@ const VerticalHeader = ({ role }) => {
     ],
     chorvador: [
       { key: "/chorvador/dashboard", icon: <DashboardOutlined />, label: "Dashboard" },
-      { key: "/chorvador/animals", icon: <FieldNumberOutlined />, label: "Hayvonlar ro‘yxati" },
+      { key: "/chorvador/animals", icon: <FieldNumberOutlined />, label: "Mening Hayvonlarim" },
       { key: "/chorvador/feeding", icon: <FundOutlined />, label: "Rasion & Oziqlantirish" },
       { key: "/chorvador/health", icon: <BgColorsOutlined />, label: "Sog‘liq monitoringi" },
       { key: "/chorvador/finance", icon: <HomeOutlined />, label: "Moliyaviy tahlil" },

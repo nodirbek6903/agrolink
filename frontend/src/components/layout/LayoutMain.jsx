@@ -14,7 +14,7 @@ const MainLayout = ({ role }) => {
   };
 
   return (
-    <Layout className="min-h-screen bg-[#f8fdf9] relative transition-all duration-300">
+    <Layout className="min-h-screen bg-[#f8fdf9] relative transition-all duration-300 overflow-hidden">
       <Header
         className="fixed top-0 left-0 right-0 z-50 shadow-sm border-b flex items-center px-6 justify-between"
         style={{
@@ -35,10 +35,14 @@ const MainLayout = ({ role }) => {
           backgroundColor: "#ffffff",
           border: "1px solid #d7f0dd",
           borderRadius: "16px",
-          height: "78vh",
+          position: "fixed",
+          top: "85px",
+          left: collapsed ? "-260px" : "24px",
+          bottom: "24px",
           overflowY: "auto",
+          zIndex: 40,
         }}
-        className={`fixed top-[85px] left-6 shadow-lg transition-all duration-300 ${
+        className={`shadow-lg transition-all duration-300 ${
           collapsed
             ? "opacity-0 -translate-x-5 pointer-events-none"
             : "opacity-100 translate-x-0"
@@ -47,7 +51,14 @@ const MainLayout = ({ role }) => {
         <VerticalHeader role={role} />
       </Sider>
 
-      <Content className="pt-[90px] px-8 pb-10 transition-all duration-300">
+      <Content
+        className="pt-[90px] pl-[280px] pr-8 pb-10 transition-all duration-300 overflow-y-auto"
+        style={{ 
+          height: "100vh",
+          paddingLeft: collapsed ? "40px" : "280px",
+          transition: "all 0.3s ease"
+        }}
+      >
         <div className="max-w-[1400px] mx-auto mt-2">
           <Outlet />
         </div>
